@@ -1,9 +1,9 @@
 ---
-title: "Geographic position, not building morphology, governs within-class urban heat inequality: a population-weighted Gini decomposition framework (WUDAPT-FUSE) for the Greater Bay Area"
+title: "Geographic proxies are the most efficient indicators of within-LCZ heat exposure heterogeneity in the Greater Bay Area: an identification-aware Gini decomposition framework (WUDAPT-FUSE)"
 author:
   - "Yanhuo Luo^a,\\*^"
 date: "May 2026"
-running_title: "Geographic position governs within-class urban heat inequality"
+running_title: "Geographic proxies indicate within-LCZ heat heterogeneity"
 journal: "Sustainable Cities and Society"
 manuscript_type: "Original research article"
 ---
@@ -29,7 +29,7 @@ manuscript_type: "Original research article"
 
 # Abstract
 
-Local Climate Zone (LCZ) frameworks are widely used to map urban thermal differences, and recent work suggests that morphology-driven subdivision of each LCZ class can resolve fine-scale heat exposure. We tested this hypothesis and three competing alternatives at 100-m scale in three Greater Bay Area (GBA) cities (Shenzhen, Guangzhou, Dongguan; 33 million residents). Combining ERA5-HEAT, the Demuzere global LCZ map, WorldPop 2020, and 151,896 OpenStreetMap building footprints, we built a workstation-runnable framework (WUDAPT-FUSE) that synthesises hourly 100-m UTCI through deviation injection, preserving both city-mean ERA5 dynamics and LCZ-class heterogeneity. Using population-weighted Gini coefficients and Pyatt–Yitzhaki decomposition, we tested four hypotheses: H1 morphology (8 OSM parameters), H2 topology (5 persistent-homology proxies), H3 hybrid form-plus-topology (13 features), and H4 geographic position (coast and mountain distance plus an elevation proxy). The Heat Degree Hours Gini reached 0.057, with 83.5% within-class inequality (86.4% in the built-up subset). Subdividing nine built-up classes into 39 morphology-driven subcategories reduced the built-up within-class share by only 1.0 percentage point (86.4% → 85.4%); topology added 0.2 pp and the hybrid scheme 0.9 pp—all below the 5-pp threshold. Geographic position broke this barrier with a 10.8-pp reduction. Diurnal decomposition revealed asymmetric signatures consistent with sea-breeze (daytime) and katabatic-flow (nighttime) physics, and the mechanism remained robust across four seasons of 2020. Cross-city transfer passed the 5-pp threshold in 4/4 Shenzhen seasons and 3/4 Dongguan seasons but failed in Guangzhou (0/4), with city compactness as the key moderator. These findings reposition the LCZ subcategorization debate: within-class urban heat inequality is governed by geographic position—not by building form or local topology—and adaptation should prioritise coast- and mountain-proximal interventions over morphology-targeted retrofits.
+Local Climate Zone (LCZ) frameworks are widely used to map urban thermal differences, and recent work suggests morphology-driven subdivision of each LCZ class can resolve fine-scale heat exposure. We tested this hypothesis and three alternatives at 100-m scale in three Greater Bay Area cities (Shenzhen, Guangzhou, Dongguan; 33 million residents). Using ERA5-HEAT, the Demuzere global LCZ map, WorldPop 2020, and 151,896 OpenStreetMap building footprints, we built a workstation-runnable framework (WUDAPT-FUSE) synthesising hourly 100-m UTCI through deviation injection, complemented by an identification diagnostic that decomposes UTCI variance by (parent ERA5 cell × LCZ class) groups: ~37 % is structurally determined by parent-cell + LCZ membership, and ~63 % is residual heterogeneity available to candidate explanatory features. Using population-weighted Gini coefficients and Pyatt–Yitzhaki decomposition, we tested four feature families: H1 morphology (8 OSM parameters), H2 topology (5 persistent-homology proxies), H3 hybrid form-plus-topology (13 features), and H4 geographic position (elevation-based mountain distance, coastline distance, elevation). Heat Degree Hours Gini reached 0.057, with 83.5 % within-class inequality (86.4 % built-up subset). Refining nine built-up classes into 39 morphology subcategories reduced the within-class share by only 1.0 pp; topology added 0.2 pp and the hybrid scheme 0.9 pp—all below the 5-pp threshold. Geographic position achieved a 10.8-pp reduction, indicating that geographic proxies are the most efficient indicators of intra-group variability among the families tested. Diurnal patterns are consistent with sea-breeze (day) and katabatic-flow (night) signatures, and results persist across four seasons of 2020. Cross-city transfer passed in 4/4 Shenzhen and 3/4 Dongguan seasons but failed in Guangzhou (0/4), with city compactness as a candidate moderator (N = 3). Because morphology was not directly injected into the synthesis, results characterise *feature explanatory efficiency under deviation-injected identification*, not independent causal drivers. Within this scope, geographic proxies dominate morphological and topological subcategorization, and adaptation prioritisation should accordingly weight geographic factors first.
 
 # Keywords
 
@@ -174,6 +174,12 @@ We adopt **5 percentage points (pp)** as the *a priori* significance threshold f
 3. **Robustness of the qualitative ranking.** Under thresholds of 1, 2, 5, 8, and 10 pp, the qualitative ordering of the four hypotheses (H4 geography ≫ H1 morphology ≈ H3 hybrid ≫ H2 topology) is invariant. Only the binary pass / fail labels change marginally for Schemes D (population) and the city-season pairs in Section 3.11.
 
 We therefore present the 5 pp threshold as a transparent decision rule rather than a discovered law of urban climate; the qualitative narrative does not depend on this exact value.
+
+### 2.6.2 Identification diagnostic
+
+A central concern with deviation-injection synthesis is that 100-m UTCI values are derived rather than observed: cells that share a parent ERA5 cell and an LCZ class start with identical "skeleton" values (city-mean ERA5 plus class anomaly) and diverge only through bilinear interpolation of the ERA5 forcing across parent-cell boundaries, time-varying $\Delta T_{LCZ}$ residuals, and any sub-LCZ-class smoothing. Whether candidate explanatory features (morphology, topology, geography) can plausibly index the residual heterogeneity therefore depends on how much variance remains *within* (parent × LCZ) groups after construction.
+
+We test this directly. For each (parent ERA5 cell × built-up LCZ class) pair (N = 35 effective groups in Shenzhen July 2020) we compute the within-group variance share of seven variables: synthesized UTCI mean and HDH, two morphological parameters (BSF, MBH), real elevation from a 30-m SRTM DEM resampled to 100 m (Section 2.2), and the geographic coordinates (latitude, longitude). We compare these shares to assess (i) how strongly the synthesis is structurally constrained by parent-cell + LCZ membership and (ii) whether candidate explanatory features retain enough within-group variance to in principle explain the residual UTCI heterogeneity. This diagnostic is reported in Section 3.5.1 (Fig. S2; Table S1) and frames the language of feature *explanatory efficiency* used throughout Sections 3.5–3.13.
 
 ## 2.7 Diurnal and seasonal validation
 
@@ -366,6 +372,32 @@ We propose three explanations:
 2. **Population concentrates in similar zones.** Five LCZ classes (8, 4, 2, 6, 5) host 88.4% of HDH exposure, and these classes contain many subcategories with similar mean exposure. Subcategorization redistributes exposure but does not segregate it.
 
 3. **Form is only one driver.** Other factors—proximity to green and blue infrastructure, prevailing wind, distance to coast, anthropogenic heat fluxes—likely shape within-class variation. None of these can be recovered by clustering on building form alone.
+
+### 3.5.1 Identification diagnostic: how much intra-(parent × LCZ) heterogeneity remains?
+
+Before testing further hypotheses, we quantify how much UTCI variance is structurally constrained by (parent ERA5 cell × LCZ class) membership and how much is residual heterogeneity available to candidate explanatory features (Methods §2.6.2). For Shenzhen July 2020 (212,755 valid built-up cells, 35 effective parent × LCZ groups), the within-group variance share is:
+
+| Variable | Within-group variance share |
+|---|:---:|
+| Synthesized UTCI mean (°C) | **63.5 %** |
+| HDH (synthesized, °C·h) | 64.6 % |
+| BSF (morphology) | 95.7 % |
+| MBH (morphology) | 94.7 % |
+| Elevation (real, m) | 85.5 % |
+| Latitude (geographic) | 79.3 % |
+| Longitude (geographic) | 71.0 % |
+
+(Fig. S2; Supplementary Table S1.)
+
+Three observations follow.
+
+First, **synthesized UTCI is only partially constrained** by parent-cell + LCZ membership: ~37 % of intra-class variance is structurally determined by the membership pair, but **~63 % constitutes residual heterogeneity** that candidate explanatory features can in principle reduce. The deviation-injection synthesis therefore does not collapse all within-(parent × LCZ) cells to identical values; bilinear interpolation of the ERA5 forcing across parent boundaries, time-varying $\Delta T_{LCZ}$ residuals, and finite-difference numerical effects preserve a substantial intra-group spread.
+
+Second, **morphology and geography both retain ample within-group variance** (BSF 95.7 %, MBH 94.7 %, elevation 85.5 %, latitude 79.3 %), meaning each feature has *room* to explain UTCI residual heterogeneity. The H1–H4 horse race that follows is therefore not a tautology: feature families differ in whether they *use* this room.
+
+Third, the **maximum reducible within-class share** under any feature subcategorization is bounded above by the inter-(parent × LCZ) UTCI variance share, i.e. ~22.9 percentage points (the gap between the LCZ-only within share of 86.4 % and the parent × LCZ within share of 63.5 %; Fig. S2). Against this ceiling, the Phase 6 H4 reduction of 10.8 pp (Section 3.7) corresponds to **~47 % efficiency** in capturing inter-(parent × LCZ) variability. The H1 morphology reduction of 1.0 pp captures ~4 % of the ceiling. We interpret the H1–H4 gap as a genuine difference in feature *explanatory efficiency under the deviation-injection identification structure*, not as an unconditional causal claim about morphology versus geography.
+
+This diagnostic frames the language used throughout the remaining results: where v1 of this paper used "drives" or "governs", v2 uses "is the most efficient indicator of" or "captures the largest fraction of inter-group variability". Section 4.4 (Limitations) discusses how a higher-resolution synthesis or fully observation-driven 100-m UTCI dataset would tighten or relax these identification bounds.
 
 ## 3.6 Topology captures structure that morphology misses
 
@@ -1421,10 +1453,13 @@ and H4 geography (coast + mountain distance + elevation proxy,
 dimensions: physical (sea breeze + katabatic flow + canopy
 shading), temporal (diurnal split + four seasons of 2020), and
 spatial (cross-city transfer to Guangzhou and Dongguan).
-**Conclusion:** within-class urban thermal-exposure inequality is
-governed by *geographic position*, not building morphology or
-local topology; the mechanism is physically grounded, temporally
-robust, and modulated by city compactness.
+**Conclusion:** at the population-weighted scale and under the
+deviation-injection identification structure, *geographic proxies*
+are the most efficient indicators of within-LCZ heat exposure
+heterogeneity, dominating morphological and topological
+subcategorization; the pattern is consistent with sea-breeze and
+katabatic-flow signatures, temporally robust, and city-compactness-
+modulated.
 
 ## Figure 3. UTCI dataset and baseline inequality.
 
