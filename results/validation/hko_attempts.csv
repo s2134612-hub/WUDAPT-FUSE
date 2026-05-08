@@ -1,0 +1,5 @@
+endpoint,url,success,message
+annual_csv,https://www.hko.gov.hk/cis/csv/CLMTEMP_LFS_2020.csv,False,HTTPError: HTTP Error 404: Not Found
+annual_climate,https://www.weather.gov.hk/en/cis/data/climat/LFS_2020.csv,False,HTTPError: HTTP Error 404: Not Found
+open_data_API,https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en,True,"got 2,905 bytes"
+csv_temperature,https://www.hko.gov.hk/cis/data/csv/TEMP_LFS_2020_07.csv,False,HTTPError: HTTP Error 404: Not Found
