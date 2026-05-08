@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.PENDING.svg)](https://doi.org/10.5281/zenodo.PENDING)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20080489.svg)](https://doi.org/10.5281/zenodo.20080489)
 [![GitHub release](https://img.shields.io/github/v/release/s2134612-hub/WUDAPT-FUSE)](https://github.com/s2134612-hub/WUDAPT-FUSE/releases)
 
 ---
@@ -174,7 +174,7 @@ Tested on Windows 11 + miniconda; should work on Linux/macOS with the conda envi
 
 ## Citation
 
-If you use this framework, please cite:
+If you use this framework, please cite **both** the paper and the software:
 
 ```bibtex
 @article{Luo2026WUDAPT-FUSE,
@@ -185,9 +185,18 @@ If you use this framework, please cite:
   year    = {2026},
   note    = {Manuscript submitted for publication}
 }
-```
 
-The code release is also archived at Zenodo and can be cited via its DOI (assigned upon acceptance).
+@software{Luo2026WUDAPT-FUSE-software,
+  title     = {WUDAPT-FUSE: A workstation-runnable framework for testing whether building morphology,
+               topology, or geographic position governs within-class urban heat exposure inequality},
+  author    = {Luo, Yanhuo},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {1.0.0},
+  doi       = {10.5281/zenodo.20080489},
+  url       = {https://doi.org/10.5281/zenodo.20080489}
+}
+```
 
 ---
 

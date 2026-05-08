@@ -12,6 +12,11 @@ authors:
     orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: replace with real ORCID
 repository-code: "https://github.com/s2134612-hub/WUDAPT-FUSE"
 url: "https://github.com/s2134612-hub/WUDAPT-FUSE"
+doi: "10.5281/zenodo.20080489"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20080489"
+    description: "Permanent Zenodo archive of WUDAPT-FUSE v1.0.0"
 abstract: "WUDAPT-FUSE is a workstation-runnable analytical framework that fuses ERA5-HEAT, the Demuzere global Local Climate Zone map, WorldPop 2020 gridded population, and OpenStreetMap building footprints into a single 100-m grid, synthesises hourly UTCI fields by deviation injection, and tests four competing hypotheses (morphology, topology, hybrid form-plus-topology, geographic position) for within-class urban heat inequality using the population-weighted Pyatt–Yitzhaki Gini decomposition. Applied to three Greater Bay Area cities (Shenzhen, Guangzhou, Dongguan) across four seasons of 2020, the framework runs end-to-end in under 5 minutes on a single GPU workstation."
 keywords:
   - urban heat inequality
