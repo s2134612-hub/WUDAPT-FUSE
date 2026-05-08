@@ -113,7 +113,7 @@ Aggregate comparison at the synthesized 100-m grid cell containing the station y
 - **Daytime mean (08:00–20:00 SHT)**: observed 31.85 °C, synthesized 32.78 °C (bias +0.93 K)
 - **Nighttime mean (20:00–08:00 SHT)**: observed 29.92 °C, synthesized 28.28 °C (bias −1.64 K)
 
-Across the three aggregate metrics, **RMSE = 1.11 K, MAE = 0.98 K, mean bias = −0.36 K**. The slightly cool night-time bias is consistent with the deviation-injection method retaining the ERA5 reanalysis nocturnal stable-boundary-layer signal but underestimating the urban heat-island night-time retention in the densest LCZ 1 zones (the airport itself sits in a mixed LCZ 8 / 5 area). The day-night bias asymmetry (+0.93 K day, −1.64 K night) is within the 1.5–2.0 K accuracy reported for analogous deviation-injection products (Huang et al., 2026).
+Across the three aggregate metrics, **RMSE = 1.11 K, MAE = 0.98 K, mean bias = −0.36 K**. To bound the validation uncertainty due to unknown station-side mean radiant temperature (MRT) — UTCI is sensitive to MRT but ISD does not provide direct radiation observations — we performed a sensitivity analysis under three MRT proxies (Table S2): (i) MRT = $T_{air}$ (the v13 baseline reported above; conservative under daytime sunlit conditions); (ii) MRT = $T_{air}$ + 4 K (day) / $T_{air}$ − 1 K (night), corresponding to typical urban-canyon clear-sky offsets in subtropical July (Lindberg et al., 2008); (iii) MRT = $T_{air}$ + 2 K (day) / $T_{air}$ − 0.5 K (night), a mild-urban intermediate. Under the urban-canyon MRT proxy (ii), the station-derived daytime UTCI shifts from 31.85 °C to 32.60 °C, narrowing the synthesized bias to **+0.18 K (day)** and **−1.45 K (night)**. The implied **validation envelope is therefore ±1–2 K in monthly aggregates and up to ±2.5 K in instantaneous daytime extremes**, comparable to the 1.5–2.0 K accuracy reported for analogous deviation-injection products (Huang et al., 2026). Because MRT corrections apply symmetrically across all spatial cells, the relative ranking of the H1–H4 hypotheses (Section 3.7) is unchanged.
 
 Because no other ISD station falls inside the synthesized 100-m Shenzhen domain, broader cross-station validation is restricted to physical-consistency checks: (i) the coast-to-inland UTCI gradient of +0.20 °C km⁻¹ (Section 3.8, Fig. 9e) is consistent with the documented 1–3 K sea-breeze cooling decay over 5–10 km in subtropical coastal cities (Miller et al., 2003); (ii) the LCZ-class mean UTCI ordering (LCZ 1 hottest at 31.88 °C; LCZ 9 coolest at 29.69 °C, Section 3.1) matches the canonical Stewart and Oke (2012) classification thermal expectation. Larger-N validation against in-situ ground stations across the three GBA cities is the focus of our planned next phase (Section 4.10).
 
@@ -416,15 +416,28 @@ geometric structure across multiple thresholds, not just a smooth
 gradient.
 
 Per-LCZ topological signatures vary by an order of magnitude
-(Fig. 6c–e; Table 5). The persistence images of four representative
-classes (LCZ 1, 4, 8, 9) at $H_1$ resolution (Fig. 6c) show
-qualitatively different patterns. The topological-feature heatmap
-(Fig. 6d) reveals that LCZ 6 (Open low-rise) produces 297 holes
-($\beta_1$) and the highest entropy (6.91) of any built-up class,
-while LCZ 1 (Compact high-rise) produces only 1 hole. The pairwise
-Wasserstein-2 distance matrix between LCZ classes (Fig. 6e) has a
-maximum of 21.76 and a minimum of 1.55—a 14× dynamic range that
-far exceeds the per-class mean UTCI spread of only 2.2 K. Such
+(Fig. 6c–e; Table 5; normalized counts in Fig. S5). Because raw
+$\beta_0$ and $\beta_1$ counts are area-dependent (LCZ 6 covers
+692 km² versus LCZ 1's 20 km²), we report both raw counts and
+density per 10 km² (= per 1,000 cells) and rely on intensive,
+scale-invariant measures (persistence entropy, Wasserstein-2
+distance) for primary cross-class comparison. The persistence
+images of four representative classes (LCZ 1, 4, 8, 9) at $H_1$
+resolution (Fig. 6c) show qualitatively different patterns. The
+topological-feature heatmap (Fig. 6d) confirms that LCZ 6
+(Open low-rise) has the highest $\beta_1$ density (4.29 holes per
+10 km², 297 holes total) and the highest entropy (6.91) of any
+built-up class, while LCZ 1 (Compact high-rise) has the lowest
+$\beta_1$ density (0.49 per 10 km², 1 hole total) and the lowest
+entropy (4.17). The qualitative ranking is robust to area
+normalization: LCZ 6 > LCZ 8 > LCZ 9 > LCZ 4 by both raw count
+and density (Fig. S5). The pairwise Wasserstein-2 distance
+matrix between LCZ classes (Fig. 6e) has a maximum of 21.76 and
+a minimum of 1.55, a 14× *relative* dynamic range that we report
+as a within-TDA dimensionless ratio (we caution against directly
+comparing this ratio to the per-class mean UTCI spread of ~2.2 K
+because the two quantities have different units and statistical
+meaning). Such
 large spread indicates that LCZ classes share **distinct topological
 fingerprints**, even when their mean UTCI values differ by only
 ~2 K.
@@ -884,7 +897,7 @@ First, ERA5 resolution caps the spatial detail any synthesis method can recover 
 
 Second, broader cross-station ground-truth validation is restricted by data availability — only one international ISD station (Shenzhen Bao'an) lies within the synthesized 100-m Shenzhen domain. Larger-N validation against the Shenzhen Meteorological Bureau station network and across the Greater Bay Area is the focus of our planned next phase (Section 4.10).
 
-Third, OSM has incomplete coverage. About 71% of buildings lack height information and we filled missing values with the median (9 m). OSM also under-samples informal buildings, which are common in LCZ 3.
+Third, OSM has incomplete coverage. About 71 % of buildings lack height information and we filled missing values with the median (9 m). OSM also under-samples informal buildings, which are common in LCZ 3. The compression of morphological diversity from height imputation likely under-estimates the morphology effect; whether a non-imputed UMP set (using only buildings with explicit `building:height` or `building:levels`) would strengthen the H1 reduction is an open question, but the four outlier subcategories with n < 50 cells (LCZ 1E n = 2; LCZ 3B n = 18; LCZ 3D n = 7; LCZ 10E n = 5; total 95 cells = 0.04 % of grid) contribute disproportionately to extreme rank tails (Fig. S6) and are excluded from primary Table 4.
 
 Fourth, the 100-m grid inherits classification errors from the Demuzere et al. (2022) LCZ map; the authors acknowledge a per-pixel uncertainty especially for natural classes (LCZ 11–17), which propagates into our coast / mountain distance metrics.
 
@@ -1426,17 +1439,17 @@ This means its UTCI field contains many cool patches (e.g., parks,
 gaps) embedded in a warm matrix, a topological signature absent from
 compact classes (LCZ 1, 10).
 
-## Table 4. Top 5 most-exposed LCZ subcategories (by mean HDH).
+## Table 4. Top 5 most-exposed LCZ subcategories (by mean HDH; robustness-screened).
 
 | Subcategory | LCZ | n grids (total) | n grids (populated) | Population | UTCI mean (°C) | TSD (h) | HDH | Exposure share |
 |:----------:|:---:|---------------:|--------------------:|-----------:|---------------:|--------:|----:|----------------|
-| 1E | 1 | 2 | 2 | 644 | 31.95 | 327 | 4,466 | 0.005% |
 | 1C | 1 | 463 | 413 | 115,680 | 31.92 | 326 | 4,445 | 0.89% |
 | 1D | 1 | 100 | 90 | 25,675 | 31.91 | 326 | 4,440 | 0.20% |
 | 1B | 1 | 304 | 245 | 61,128 | 31.89 | 324 | 4,418 | 0.47% |
-| 3D | 3 | 7 | 5 | 526 | 31.88 | 326 | 4,411 | 0.004% |
+| 1A | 1 | 1,160 | 1,160 | 275,327 | 31.85 | 325 | 4,391 | 2.09% |
+| 3B | 3 | 15 | 15 | 1,436 | 31.80 | 325 | 4,354 | 0.011% |
 
-*Note*: "n grids (total)" is the number of 100-m cells in the subcategory; "n grids (populated)" is the subset with non-zero WorldPop population, used for population-weighted exposure metrics.
+*Note*: "n grids (total)" is the number of 100-m cells in the subcategory; "n grids (populated)" is the subset with non-zero WorldPop population. **Robustness screening**: subcategories with fewer than 10 cells (LCZ 1E n = 2; LCZ 3D n = 7; LCZ 10E n = 5; 4 outlier subcategories totalling 95 cells, ~0.04 % of the built-up grid) are excluded from this primary table because their HDH means are individual-cell-driven and not population-meaningful (Fig. S6, §4.4 Limitations). The unscreened ranking, with LCZ 1E (n = 2, HDH = 4466) at the top, is reported in Supplementary Table S2.
 
 # Figures
 
