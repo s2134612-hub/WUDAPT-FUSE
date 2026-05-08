@@ -1,0 +1,8 @@
+variable,total_variance,within_group_variance,between_group_variance,within_share_pct,between_share_pct
+UTCI mean (synthesized),0.4334,0.2751,0.1583,63.48,36.52
+HDH (synthesized),246169.4219,159021.3092,87148.1127,64.6,35.4
+BSF (morphology),0.0195,0.0187,0.0008,95.69,4.31
+MBH (morphology),219.182,207.5503,11.6317,94.69,5.31
+Elevation (real),1739.5491,1488.2005,251.3486,85.55,14.45
+Latitude (geographic),15726.8413,12475.3551,3251.4862,79.33,20.67
+Longitude (geographic),62065.1594,44068.9076,17996.2518,71.0,29.0
