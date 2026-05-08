@@ -1,0 +1,39 @@
+# Citation metadata for the WUDAPT-FUSE software repository.
+# GitHub renders this as a "Cite this repository" button.
+cff-version: 1.2.0
+title: "WUDAPT-FUSE: A workstation-runnable framework for testing whether building morphology, topology, or geographic position governs within-class urban heat exposure inequality at the 100-m scale"
+message: "If you use this software, please cite both the software (this CITATION.cff) and the accompanying paper (preferred-citation below)."
+type: software
+authors:
+  - given-names: Yanhuo
+    family-names: Luo
+    email: s2134612@siswa.um.edu.my
+    affiliation: "Institute for Advanced Studies, University of Malaya, Kuala Lumpur, Malaysia"
+    orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: replace with real ORCID
+repository-code: "https://github.com/s2134612-hub/WUDAPT-FUSE"
+url: "https://github.com/s2134612-hub/WUDAPT-FUSE"
+abstract: "WUDAPT-FUSE is a workstation-runnable analytical framework that fuses ERA5-HEAT, the Demuzere global Local Climate Zone map, WorldPop 2020 gridded population, and OpenStreetMap building footprints into a single 100-m grid, synthesises hourly UTCI fields by deviation injection, and tests four competing hypotheses (morphology, topology, hybrid form-plus-topology, geographic position) for within-class urban heat inequality using the population-weighted Pyatt–Yitzhaki Gini decomposition. Applied to three Greater Bay Area cities (Shenzhen, Guangzhou, Dongguan) across four seasons of 2020, the framework runs end-to-end in under 5 minutes on a single GPU workstation."
+keywords:
+  - urban heat inequality
+  - Local Climate Zone
+  - Universal Thermal Climate Index
+  - Gini decomposition
+  - Greater Bay Area
+  - geographic position
+  - sea breeze
+  - topological data analysis
+  - reproducible research
+license: MIT
+version: "1.0.0"
+date-released: "2026-05-08"
+preferred-citation:
+  type: article
+  title: "Geographic position, not building morphology, governs within-class urban heat inequality: a population-weighted Gini decomposition framework (WUDAPT-FUSE) for the Greater Bay Area"
+  authors:
+    - given-names: Yanhuo
+      family-names: Luo
+      email: s2134612@siswa.um.edu.my
+      affiliation: "Institute for Advanced Studies, University of Malaya, Kuala Lumpur, Malaysia"
+  journal: "Sustainable Cities and Society"
+  year: 2026
+  notes: "Manuscript submitted for publication."

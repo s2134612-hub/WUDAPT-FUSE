@@ -1,0 +1,111 @@
+name: wudapt
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  # Python core
+  - python=3.11
+  - pip
+
+  # Scientific computing
+  - numpy>=1.26
+  - scipy>=1.13
+  - pandas>=2.2
+  - xarray>=2024.5
+  - dask>=2024.5
+  - zarr>=2.18
+
+  # Geospatial (conda is much more reliable than pip on Windows)
+  - gdal>=3.8
+  - rasterio>=1.3
+  - geopandas>=0.14
+  - shapely>=2.0
+  - pyproj>=3.6
+  - fiona>=1.9
+  - netcdf4>=1.6
+  - h5py>=3.10
+  - cartopy>=0.23
+  - rioxarray>=0.15
+
+  # Spatial statistics
+  - pysal>=24.1
+  - libpysal>=4.10
+  - esda>=2.5
+  - splot>=1.1
+
+  # Topological Data Analysis
+  - gudhi>=3.9
+  - pot  # optimal transport for Wasserstein distance
+
+  # Machine learning
+  - scikit-learn>=1.5
+  - xgboost>=2.0
+  - lightgbm>=4.3
+
+  # Deep learning (PyTorch with CUDA 12.1)
+  - pytorch>=2.3
+  - torchvision
+  - pytorch-cuda=12.1
+
+  # Visualization
+  - matplotlib>=3.8
+  - seaborn>=0.13
+  - plotly>=5.21
+  - bokeh>=3.4
+  - folium>=0.16
+
+  # Notebook environment
+  - jupyterlab>=4.2
+  - ipykernel
+  - ipywidgets
+
+  # Statistical modeling
+  - statsmodels>=0.14
+
+  # Development tools
+  - black
+  - flake8
+  - pytest
+  - tqdm
+
+  # Pip-only packages
+  - pip:
+    # Deep learning ecosystem
+    - pytorch-lightning>=2.2
+    - neuralop>=0.3.0   # Fourier Neural Operator
+    - einops>=0.8.0
+    - wandb>=0.17
+
+    # TDA additional
+    - giotto-tda>=0.6.0
+    - ripser>=0.6.4
+    - scikit-tda>=1.0.0
+    - persim>=0.3.5
+
+    # Symbolic regression (requires Julia separately)
+    - pysr>=0.18.0
+    - sympy>=1.12
+
+    # Causal inference
+    - econml>=0.15
+    - dowhy>=0.11
+    - causal-learn>=0.1.3.8
+    - skccm>=0.2.0       # Convergent Cross Mapping
+
+    # Climate/biometeorology
+    - pythermalcomfort>=2.10
+    - cdsapi>=0.7.0      # ERA5 download
+    - earthengine-api>=1.0  # Google Earth Engine
+
+    # Web scraping (for housing prices, POI)
+    - selenium>=4.20
+    - beautifulsoup4>=4.12
+    - requests>=2.32
+
+    # Misc utilities
+    - hydra-core>=1.3
+    - omegaconf>=2.3
+    - typer>=0.12
+    - rich>=13.7

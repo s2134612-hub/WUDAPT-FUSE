@@ -1,0 +1,35 @@
+# 最小配置文件，用于跑通 hello-world
+
+experiment:
+  name: minimal_demo
+  description: "最小演示：单网格、单时间、UTCI 计算 + TDA 玩具示例"
+
+study_area:
+  name: shenzhen
+  bbox:
+    north: 22.90
+    south: 22.40
+    east: 114.70
+    west: 113.70
+  resolution_m: 100
+
+time:
+  start: "2020-07-15 00:00"
+  end: "2020-07-21 23:00"
+  freq: "1H"
+
+data_sources:
+  era5_heat: data/raw/era5/era5_heat_shenzhen_2020_07_01_07.nc
+  lcz_map: data/raw/lcz/lcz_shenzhen_100m.tif
+
+model:
+  type: minimal_baseline    # 仅作演示
+  random_seed: 42
+
+logging:
+  level: INFO
+  log_dir: results/logs/
+
+output:
+  results_dir: results/minimal/
+  figures_dir: figures/minimal/

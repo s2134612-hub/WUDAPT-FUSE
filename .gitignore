@@ -1,0 +1,121 @@
+# ============================================================
+# WUDAPT-FUSE — .gitignore
+# ============================================================
+
+# === Raw data (downloaded from CDS / Demuzere / WorldPop / OSM) ===
+# Don't commit large binary rasters; users re-download via scripts/download_*.py
+data/raw/
+data/processed/
+data/external/
+*.nc
+*.tif
+*.geotiff
+*.zarr
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+*.egg
+.installed.cfg
+MANIFEST
+
+# === Virtual environments ===
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# === Notebooks ===
+*.ipynb
+.ipynb_checkpoints/
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Logs & temp ===
+*.log
+logs/
+tmp/
+temp/
+results/logs/
+wandb/
+lightning_logs/
+
+# === Credentials (should never be committed) ===
+.cdsapirc
+.env
+.env.*
+!.env.example
+secrets.yaml
+*.key
+*.pem
+
+# === Large model weights ===
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.ckpt
+*.pkl
+*.joblib
+models/checkpoints/
+
+# === Submission backups (keep PAPER_FULL.md only) ===
+docs/paper/WUDAPT-FUSE_paper_v1.docx
+docs/paper/WUDAPT-FUSE_paper_with_figures.docx
+docs/paper/WUDAPT-FUSE_paper_with_figures_v*.docx
+docs/paper/WUDAPT-FUSE_SCS_submission*.docx
+docs/paper/~$*.docx
+docs/paper/*.tmp.docx
+
+# === Release archives (uploaded as GitHub Release attachments, not committed) ===
+releases/
+
+# === Early development figures (replaced by final fig01-fig12) ===
+figures/01_*.png
+figures/02_*.png
+figures/03_era5*.png
+figures/hello_world.png
+figures/figS1_*.png
+figures/fig*_panelf_crop.png
+
+# === Cache ===
+*.cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Keep these (overrides above) ===
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+!results/.gitkeep
+!figures/.gitkeep
