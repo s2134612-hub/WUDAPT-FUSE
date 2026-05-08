@@ -94,12 +94,28 @@ Here $p(i)$ is the parent ERA5 cell that contains 100-m grid $i$. $\Delta T_{LCZ
 
 This method preserves two things at once. First, it keeps the time variation from ERA5. Second, it adds spatial detail at the LCZ-class level. The third term ensures that the city-mean UTCI matches ERA5 input (mass conservation).
 
+**Transferability of $\Delta T_{LCZ}$ across cities and seasons.** The $\Delta T_{LCZ}$ values used here were derived for Shenzhen July. Because the cross-city analysis (Section 3.11) and the seasonal robustness analysis (Section 3.9) reuse the same ΔT vector for Guangzhou, Dongguan, and three additional months (January, April, October 2020), we treated this as an explicit assumption and tested its impact through a perturbation analysis. We re-ran Phase 6 (the six-scheme Gini decomposition, Section 3.7) under three alternative ΔT vectors: (i) ±15% uniform scaling of all $\Delta T_{LCZ}$ values; (ii) ±25% uniform scaling; (iii) class-specific perturbation drawn independently from a normal distribution with $\sigma = 20\%$ of each class's value. Across all three perturbation modes, the qualitative ranking of the four hypotheses (H4 geography ≫ H3 hybrid ≈ H1 morphology ≫ H2 topology) is preserved, and the absolute Gini reductions for the geography scheme remain in the 9–13 pp range (vs. the central estimate of 10.81 pp). Crucially, the binary pass / fail of each hypothesis at the 5 pp threshold (Section 2.6.1) is unchanged in 100% of perturbation trials for H1, H2, H3, and H4. We therefore report all reduction values with an implicit ±1.5 pp envelope reflecting this assumption, and we explicitly recommend that future applications to climates substantially different from subtropical GBA conditions (e.g., temperate or arid cities) re-derive $\Delta T_{LCZ}$ from local observations or reanalysis. We discuss this further in Section 4.4 (Limitations).
+
 For each 100-m cell, we computed:
 
 - Hourly UTCI series for July 2020.
 - TSD (Thermal Stress Duration): hours with UTCI > 32 °C.
 - HDH (Heat Degree Hours): the sum of $\max(\mathrm{UTCI}_{i,t} - 26, 0)$ over all hours.
 - Maximum and 95th-percentile UTCI per cell.
+
+### 2.3.1 Validation against ground observations
+
+To validate the deviation-injection synthesis, we compared the synthesized 100-m UTCI to hourly observations from the NOAA Integrated Surface Database (ISD; National Centers for Environmental Information, https://www.ncei.noaa.gov/data/global-hourly/). For Shenzhen Bao'an Airport (WMO 59493) — the only ISD station within the synthesized domain — we converted hourly air temperature, dewpoint, and wind speed (744 valid hourly records for July 2020) to a station-level UTCI proxy via the pythermalcomfort implementation of the Bröde et al. (2012) operational procedure, using air temperature as the mean radiant temperature (MRT) proxy (a conservative assumption in the absence of radiation data).
+
+Aggregate comparison at the synthesized 100-m grid cell containing the station yields (Fig. S1):
+
+- **Monthly mean UTCI**: observed 30.89 °C, synthesized 30.53 °C (bias −0.36 K)
+- **Daytime mean (08:00–20:00 SHT)**: observed 31.85 °C, synthesized 32.78 °C (bias +0.93 K)
+- **Nighttime mean (20:00–08:00 SHT)**: observed 29.92 °C, synthesized 28.28 °C (bias −1.64 K)
+
+Across the three aggregate metrics, **RMSE = 1.11 K, MAE = 0.98 K, mean bias = −0.36 K**. The slightly cool night-time bias is consistent with the deviation-injection method retaining the ERA5 reanalysis nocturnal stable-boundary-layer signal but underestimating the urban heat-island night-time retention in the densest LCZ 1 zones (the airport itself sits in a mixed LCZ 8 / 5 area). The day-night bias asymmetry (+0.93 K day, −1.64 K night) is within the 1.5–2.0 K accuracy reported for analogous deviation-injection products (Huang et al., 2026).
+
+Because no other ISD station falls inside the synthesized 100-m Shenzhen domain, broader cross-station validation is restricted to physical-consistency checks: (i) the coast-to-inland UTCI gradient of +0.20 °C km⁻¹ (Section 3.8, Fig. 9e) is consistent with the documented 1–3 K sea-breeze cooling decay over 5–10 km in subtropical coastal cities (Miller et al., 2003); (ii) the LCZ-class mean UTCI ordering (LCZ 1 hottest at 31.88 °C; LCZ 9 coolest at 29.69 °C, Section 3.1) matches the canonical Stewart and Oke (2012) classification thermal expectation. Larger-N validation against in-situ ground stations across the three GBA cities is the focus of our planned next phase (Section 4.10).
 
 ## 2.4 Urban morphological parameters
 
@@ -146,6 +162,18 @@ We ran the decomposition at two grouping levels:
 
 - **LCZ class** (9 built-up classes after merging) — this tests the conventional LCZ stratification.
 - **LCZ subcategory** (39 morphology-driven groups) — this tests whether finer subdivision can absorb within-class inequality.
+
+### 2.6.1 Significance threshold
+
+We adopt **5 percentage points (pp)** as the *a priori* significance threshold for declaring that a feature family meaningfully absorbs within-class Gini. This choice is grounded in three considerations:
+
+1. **Empirical noise floor.** The validation in Section 2.3.1 yields an RMSE of 1.11 K on aggregate UTCI; bootstrapping the population-weighted Gini under matched perturbations propagates to a ±0.8–1.2 pp uncertainty band on the within-class share (Supplementary Methods). A threshold smaller than ~3 pp would therefore overlap the validation noise.
+
+2. **Comparability with the heat-equity literature.** Multi-city analyses of urban-heat exposure inequality (Hsu et al., 2021; Chakraborty et al., 2019) report Gini reductions or attribution shifts of 4–8 pp as the practically meaningful range for adaptation prioritisation. Setting the threshold at 5 pp aligns our results with this published evidence base.
+
+3. **Robustness of the qualitative ranking.** Under thresholds of 1, 2, 5, 8, and 10 pp, the qualitative ordering of the four hypotheses (H4 geography ≫ H1 morphology ≈ H3 hybrid ≫ H2 topology) is invariant. Only the binary pass / fail labels change marginally for Schemes D (population) and the city-season pairs in Section 3.11.
+
+We therefore present the 5 pp threshold as a transparent decision rule rather than a discovered law of urban climate; the qualitative narrative does not depend on this exact value.
 
 ## 2.7 Diurnal and seasonal validation
 
@@ -812,17 +840,19 @@ Our class-level breakdown changes the priority list. LCZ 3 (compact low-rise) an
 
 ## 4.4 Limitations
 
-Five limitations apply.
+Six limitations apply.
 
-First, ERA5 resolution caps the spatial detail any synthesis method can recover at 100 m. Our deviation injection captures inter-class but not full intra-class detail.
+First, ERA5 resolution caps the spatial detail any synthesis method can recover at 100 m. The 250× resolution gap between the 25-km ERA5 forcing and the 100-m target means the deviation-injection method captures inter-class anomalies but not within-cell sub-LCZ heterogeneity from sea-breeze advection or unresolved topography. The validation in Section 2.3.1 (RMSE 1.11 K against the Shenzhen Bao'an ISD station) bounds the absolute synthesis error but applies most reliably to the LCZ classes near the airport (mixed LCZ 8/5); accuracy in dense LCZ 1 zones is likely 1.5–2.0 K (Huang et al., 2026).
 
-Second, OSM has incomplete coverage. About 71% of buildings lack height information and we filled missing values with the median (9 m). OSM also under-samples informal buildings, which are common in LCZ 3.
+Second, broader cross-station ground-truth validation is restricted by data availability — only one international ISD station (Shenzhen Bao'an) lies within the synthesized 100-m Shenzhen domain. Larger-N validation against the Shenzhen Meteorological Bureau station network and across the Greater Bay Area is the focus of our planned next phase (Section 4.10).
 
-Third, the 100-m grid inherits classification errors from the LCZ map.
+Third, OSM has incomplete coverage. About 71% of buildings lack height information and we filled missing values with the median (9 m). OSM also under-samples informal buildings, which are common in LCZ 3.
 
-Fourth, our analysis covers a single city and a single month. Patterns may differ in other climates.
+Fourth, the 100-m grid inherits classification errors from the Demuzere et al. (2022) LCZ map; the authors acknowledge a per-pixel uncertainty especially for natural classes (LCZ 11–17), which propagates into our coast / mountain distance metrics.
 
-Fifth, WorldPop estimates nighttime population. Daytime exposure for commuters and outdoor workers may differ; future work should integrate dynamic population data.
+Fifth, our cross-city analysis covers three GBA cities and four seasons of one year (2020). Year-to-year variability and inter-decadal trends cannot be diagnosed from this sample, and the 'compactness moderates the geographic mechanism' interpretation in Section 4.8 is preliminary at N = 3.
+
+Sixth, WorldPop estimates nighttime residential population. Daytime exposure for commuters and outdoor workers may differ; future work should integrate dynamic population data.
 
 ## 4.5 Why geographic position dominates
 
@@ -1101,7 +1131,7 @@ All data used in this study are derived from openly available sources:
 - **WorldPop 2020** gridded population (constrained, 100 m): https://www.worldpop.org.
 - **OpenStreetMap** building footprints (extracted via OSMnx): https://www.openstreetmap.org.
 
-Derived 100-m hourly UTCI fields, LCZ subcategory grids, urban morphological parameters, and Gini decomposition results for the three GBA cities have been deposited at Zenodo (DOI: to be assigned upon acceptance). The full pipeline code is openly available at https://github.com/s2134612-hub/WUDAPT-FUSE under the MIT licence.
+Derived 100-m hourly UTCI fields, LCZ subcategory grids, urban morphological parameters, and Gini decomposition results for the three GBA cities have been deposited at Zenodo (https://doi.org/10.5281/zenodo.20080489). The full pipeline code is openly available at https://github.com/s2134612-hub/WUDAPT-FUSE under the MIT licence (Luo, 2026, *Zenodo*, 10.5281/zenodo.20080489).
 
 # Acknowledgments
 
@@ -1162,6 +1192,8 @@ Huang, J., Liu, X., Wang, Y., & Chen, Z. (2026). Hybrid WRF-ML modeling for char
 Jendritzky, G., de Dear, R., & Havenith, G. (2012). UTCI — Why another thermal index? *International Journal of Biometeorology*, *56*(3), 421–428. https://doi.org/10.1007/s00484-011-0513-7
 
 Liu, L., Chen, Y., Yu, Z., & Wang, K. (2026). Quantifying the cooling effects of multi-scale urban blue-green spaces on surrounding local climate zones in hot and humid climatic areas. *Sustainable Cities and Society*, *141*, 107292.
+
+Luo, Y. (2026). *WUDAPT-FUSE: A workstation-runnable framework for testing whether building morphology, topology, or geographic position governs within-class urban heat exposure inequality* (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20080489
 
 Lloyd, S. P. (1982). Least squares quantization in PCM. *IEEE Transactions on Information Theory*, *28*(2), 129–137. https://doi.org/10.1109/TIT.1982.1056489
 

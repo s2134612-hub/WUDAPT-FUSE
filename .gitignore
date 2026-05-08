@@ -99,8 +99,9 @@ figures/01_*.png
 figures/02_*.png
 figures/03_era5*.png
 figures/hello_world.png
-figures/figS1_*.png
+figures/figS1_preliminary_*.png
 figures/fig*_panelf_crop.png
+# (figS1_noaa_isd_validation.png is the published Supplementary Fig S1 — keep)
 
 # === Cache ===
 *.cache

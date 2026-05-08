@@ -1,0 +1,5 @@
+test,status,note
+T1_lapse,skip,DEM not in repo
+T2_diurnal,skip,Hourly NetCDF not retained; full pipeline regenerates from full_pipeline_july.py
+T3_heatwave,skip,
+T4_coastline,ok,see §3.8 / Fig. 9e
