@@ -19,11 +19,11 @@ manuscript_type: "Original research article"
 # Highlights
 
 - A 4-stage pipeline (WUDAPT-FUSE) tests four explanations of intra-LCZ heat inequality
-- Within-class share is 83.5% of total Gini (86.4% in built-up subset)
-- Morphology subcategories absorb only 1.0 pp of the built-up within-class share
-- Topology and form-plus-topology hybrid each fail the 5-pp threshold
-- Coast and mountain distance reduce within-class Gini by 10.8 pp (PASS)
-- City compactness moderates the geographic mechanism across three GBA cities
+- Within-class HDH Gini share: 83.5% city-wide; 86.4% in built-up subset
+- Identification diagnostic: ~22.9 pp is the maximum reducible ceiling
+- Morphology and topology subcategorization capture <5% of this ceiling
+- Geographic-distance proxies are most efficient: 10.8 pp (~47% of ceiling)
+- Pattern persists across 4 seasons; transferable to compact GBA cities only
 
 ---
 
@@ -51,7 +51,7 @@ We answer this question for Shenzhen, China (14.67 million residents) for July 2
 
 2. **A clean empirical test.** We extract 151,896 building footprints from OpenStreetMap, compute eight morphological parameters per 100-m cell, and run k-means inside each built-up LCZ class. We obtain 39 subcategories—1.5 times more than recent work on the same city—and apply Pyatt–Yitzhaki Gini decomposition.
 
-3. **A clear negative result.** Within-class inequality accounts for 83.5% of the total Heat Degree Hours Gini at the city scale, and rises to 86.4% when the analysis is restricted to the nine built-up LCZ classes (where morphology-driven subcategorization is meaningful). Subcategorization reduces the built-up within-class share by only 1.0 percentage point (86.4% → 85.4%). Morphology alone does not explain the gap.
+3. **A clear and identification-aware negative result for morphology.** Within-class inequality accounts for 83.5% of the total Heat Degree Hours Gini at the city scale, and rises to 86.4% in the nine built-up LCZ classes. Refining these into 39 morphology-driven subcategories reduces the within-class share by only 1.0 percentage point (86.4% → 85.4%) — about 4% of the ~22.9-pp maximum reducible ceiling implied by our deviation-injection identification (Section 3.5.1). Under this synthesis design, morphology-driven subcategorization is a low-efficiency indicator of intra-LCZ residual UTCI heterogeneity at the population-weighted scale.
 
 4. **A redirected priority list.** Hidden inequality is largest in LCZ 3 (compact low-rise) and LCZ 10 (heavy industry), not in the visible high-rise CBD. Adaptation efforts should target these zones.
 
@@ -363,7 +363,7 @@ To test whether morphology absorbs within-class inequality, we restricted the an
 
 Despite a 4.3-fold increase in the number of groups, the within-group share fell by only **1.0 percentage point** (86.4% → 85.4%; relative reduction of 1.2%; Fig. 5a). The complementary increase in the between-group share is similarly small (Fig. 5b). This held across all three metrics. The top-10 hottest subcategories (Fig. 5c) are dominated by LCZ 1 (Compact high-rise) variants, and the population-vs-mean-HDH relationship (Fig. 5d) shows that subcategories carrying the bulk of population (>10⁴ residents) cluster narrowly around the median exposure—i.e., exposure does not stratify cleanly along subcategory lines.
 
-This is the key empirical result. Morphology-driven subcategorization, the dominant intra-LCZ refinement strategy in current literature, **does not absorb within-class heat exposure inequality at the 100-m scale**.
+This is the key empirical result for hypothesis H1. Under the deviation-injection identification structure (Section 3.5.1), morphology-driven subcategorization — the dominant intra-LCZ refinement strategy in current literature — **captures only a small fraction of the residual within-(parent × LCZ) heterogeneity available at the 100-m scale**, in marked contrast to the geography family tested in Section 3.7. We do not interpret this as evidence that morphology is causally irrelevant to local UTCI; rather, that under our synthesis design and at the population-weighted scale, morphology is a low-efficiency indicator of intra-group variability.
 
 We propose three explanations:
 
@@ -516,7 +516,7 @@ investment should weight geography first, form second.
 
 ## 3.8 Physical mechanism: mountain shading and sea breeze drive within-class inequality
 
-The breakthrough in Section 3.7 raises a physical question: which
+The geographic reduction reported in Section 3.7 raises a physical question: which
 geographic process actually moves UTCI inside an LCZ class? We
 decomposed the geography contribution into single-feature tests and
 quantified the within-LCZ relation between UTCI and each distance
@@ -850,11 +850,17 @@ The most-exposed subcategories were small and dense (Table 4). LCZ 1E—an extre
 
 # 4. Discussion
 
-## 4.1 What the negative result means
+## 4.1 What the result means under deviation-injection identification
 
-Two findings emerge from our analysis of 14.67 million Shenzhen residents over July 2020. First, population-weighted HDH Gini reaches 0.057, with 83.5% of inequality lying within LCZ classes. Second, refining 9 classes into 39 morphology-driven subcategories cuts the within-class share by just 1.0 percentage point. Morphology alone is not the main driver of within-class heat exposure inequality. The magnitude of within-class inequality is comparable to the Gini values reported in multi-city US analyses (Hsu et al., 2021; Chakraborty et al., 2019), and operates on populations whose exposure has well-established mortality consequences (Gasparrini et al., 2015; Romanello et al., 2022).
+Three findings emerge from our analysis of 14.67 million Shenzhen residents over July 2020, and they must be read jointly with the identification diagnostic in Section 3.5.1.
 
-This pushes against an assumption that runs through current LCZ literature (Huang et al., 2026; Liu et al., 2026): that finer morphological partitioning will close the within-class gap. Our results suggest it will not, at least at the 100-m scale and with current data sources.
+First, population-weighted HDH Gini reaches 0.057, with 83.5% of inequality lying within LCZ classes (86.4% in the built-up subset). The magnitude of within-class inequality is comparable to the Gini values reported in multi-city US analyses (Hsu et al., 2021; Chakraborty et al., 2019), and operates on populations whose exposure has well-established mortality consequences (Gasparrini et al., 2015; Romanello et al., 2022).
+
+Second, of this within-class variance, **~37% is structurally determined by parent ERA5 cell × LCZ class membership** under the deviation-injection synthesis (Section 3.5.1, Fig. S2), and **~63% is residual heterogeneity** available to candidate explanatory features. The maximum Gini reduction any feature subcategorization can achieve under our identification structure is therefore bounded above by ~22.9 percentage points (the inter-(parent × LCZ) UTCI variance share within LCZ classes).
+
+Third, **morphology subcategorization (H1) reduces the within-class share by only 1.0 pp — about 4 % of this ceiling** — whereas geographic-proxy subcategorization (H4) reduces it by 10.8 pp, ~47% of the ceiling. We interpret this gap as a genuine difference in *feature explanatory efficiency under the deviation-injection identification structure*, not as an unconditional causal claim about morphology versus geography. Because morphological parameters were never injected into the UTCI synthesis, our results cannot exclude that morphology has additional independent effects at sub-(parent × LCZ) scales not resolved by our 25-km → 100-m forcing pipeline.
+
+Within the scope of identification, the result still pushes against a tacit assumption in the LCZ-subcategorization literature (Huang et al., 2026; Liu et al., 2026): that finer morphology-driven partitioning will close the within-class gap at the population-weighted scale. At the 100-m scale and with current open data sources, morphology alone does not appear to be the most efficient indicator of intra-class UTCI residual heterogeneity. Whether richer features (microscale wind, anthropogenic heat, building-material albedo, dynamic population) or higher-resolution synthesis would change this conclusion is an open question for follow-up work (Section 4.10).
 
 ## 4.2 Why morphology falls short
 
@@ -886,12 +892,17 @@ Fifth, our cross-city analysis covers three GBA cities and four seasons of one y
 
 Sixth, WorldPop estimates nighttime residential population. Daytime exposure for commuters and outdoor workers may differ; future work should integrate dynamic population data.
 
-## 4.5 Why geographic position dominates
+## 4.5 Why geographic proxies are the most efficient indicators
 
-Phase 6.5 (Section 3.9) decomposed the geography breakthrough into
-its physical components and revealed an asymmetry: mountain
-distance carries roughly three times the Gini reduction of coast
-distance (+9.24 vs +3.50 pp). Three reasons explain why.
+Phase 6.5 (Section 3.9) decomposed the geographic Gini reduction into
+its physical components and revealed an asymmetry: mountain-distance
+proxy carries roughly three times the Gini reduction of coast-distance
+proxy (+9.24 vs +3.50 pp). Four reasons explain this efficiency
+ranking. We emphasise *efficiency*, not *causation*: as established
+in Section 3.5.1, our deviation-injection synthesis structurally
+ties UTCI to parent-cell + LCZ membership for ~37 % of within-class
+variance, leaving ~63 % residual heterogeneity in which geography
+features happen to be the most informative subcategorizers.
 
 **First, geometry of the city**. Shenzhen has a clean north-south
 gradient defined by a forested mountain belt in the north and a
@@ -903,16 +914,20 @@ as LCZ 17 (water). Most urban cells are within 1 km of one water
 patch or another, compressing the coast-distance variable into a
 narrow range and weakening its k-means split power.
 
-**Second, the strength of the underlying physical processes**. Sea
+**Second, alignment with mesoscale physical processes**. Sea
 breeze in subtropical coastal cities provides 1–3 K of nighttime
 cooling at the immediate coast, decaying within 5–10 km inland
 (Miller et al., 2003; Crosman & Horel, 2010). Mountain shading and
 katabatic (gravity-driven) drainage flow can produce 2–4 K of
-additional cooling along the foothills (Whiteman, 2000). In Shenzhen,
-with its coast already saturated by water bodies, the mountain
-effect creates the larger spatial heterogeneity. We expect the
-relative weights to flip in cities with simpler coastlines (e.g.,
-Hong Kong) or weaker mountains (e.g., Guangzhou).
+additional cooling along the foothills (Whiteman, 2000). To the
+extent that the deviation-injection synthesis preserves these
+mesoscale signals at the parent-cell scale, geographic-distance
+features index that signal more directly than morphological features.
+In Shenzhen, with its coast already saturated by inland water bodies,
+the mountain proxy carries a larger Gini reduction. We expect the
+relative weights to shift in cities with simpler coastlines (e.g.,
+Hong Kong) or weaker mountains (e.g., Guangzhou) — Section 3.11
+provides the first cross-city test of this expectation.
 
 **Third, interaction with LCZ form classes**. Within-LCZ Pearson
 correlations (Section 3.9) reveal that LCZ 4 (Open high-rise),
@@ -924,18 +939,25 @@ LCZ 1 (Compact high-rise) exhibits essentially no gradient ($|r| <
 0.06$) because it is concentrated in central business districts
 and does not span the full geographic range.
 
-**Connection to existing literature.** The dominance of geography
-over morphology in urban heat exposure is consistent with mesoscale
-boundary-layer studies that emphasize sea–land breeze circulations
-(Miller et al., 2003; Crosman & Horel, 2010) and complex-terrain
-flows (Whiteman, 2000), as well as with the canonical observation
-that local background climate sets the envelope within which urban
-form modulates surface temperature (Oke, 1982; Voogt & Oke, 2003;
-Zhao et al., 2014; Oke et al., 2017). Our contribution is to
-quantify this dominance in an inequality framework: at the 100-m
-neighborhood scale, geographic position absorbs more population-
-weighted Gini than any of the form-or-topology features that current
-LCZ subcategorization work emphasizes.
+**Connection to existing literature.** The higher explanatory
+efficiency of geography over morphology under our synthesis design
+is qualitatively consistent with mesoscale boundary-layer studies
+emphasizing sea–land breeze circulations (Miller et al., 2003;
+Crosman & Horel, 2010) and complex-terrain flows (Whiteman, 2000),
+and with the canonical observation that local background climate
+sets the envelope within which urban form modulates surface
+temperature (Oke, 1982; Voogt & Oke, 2003; Zhao et al., 2014; Oke
+et al., 2017). Our contribution is to quantify this hierarchy in
+an *identification-aware inequality framework*: at the 100-m
+neighborhood scale and under the deviation-injection synthesis,
+geographic-distance proxies absorb more population-weighted Gini
+than any of the form-or-topology features that current LCZ
+subcategorization work emphasizes. We do not claim independent
+verification that geography drives within-LCZ UTCI in a high-
+resolution observational sense; that would require either a
+station-network density and MRT measurement coverage we do not
+yet have, or a fully observation-driven 100-m UTCI dataset (see
+Section 4.10 next steps).
 
 **Methodological lesson.** Adding more features to k-means is not
 a free lunch. Coast + mountain (2 features) gave a larger
@@ -1128,15 +1150,17 @@ Together, these steps will move from morphology-only refinement to multi-dimensi
 
 # 5. Conclusions
 
-This study presents WUDAPT-FUSE, a workstation-runnable analytical framework that fuses four open data sources to test competing explanations of within-class urban heat exposure inequality at the 100-m scale. Applied to three Greater Bay Area cities (Shenzhen, Guangzhou, Dongguan) across four seasons of 2020, the framework supports four conclusions:
+This study presents WUDAPT-FUSE, a workstation-runnable analytical framework that fuses four open data sources to test competing explanations of within-class urban heat exposure inequality at the 100-m scale, complemented by an explicit identification diagnostic that bounds what any subcategorization can achieve under deviation-injection synthesis. Applied to three Greater Bay Area cities (Shenzhen, Guangzhou, Dongguan) across four seasons of 2020, the framework supports five conclusions:
 
-1. **Within-class inequality dominates total inequality.** The population-weighted Heat Degree Hours Gini reaches 0.057, with 83.5% of total inequality lying inside individual LCZ classes. This finding contradicts the implicit assumption that LCZ-class membership is sufficient to characterise neighbourhood heat exposure.
+1. **Within-class inequality is large.** The population-weighted Heat Degree Hours Gini reaches 0.057, with 83.5% of total inequality lying inside individual LCZ classes (86.4% in the built-up subset). This pushes against the implicit assumption that LCZ-class membership is sufficient to characterise neighbourhood-scale heat exposure.
 
-2. **Building morphology and topology cannot absorb within-class inequality.** Within the nine built-up LCZ classes (where the within-class share is 86.4% on a same-baseline analysis), refining them into 39 morphology-driven subcategories reduces this share by only 1.0 percentage point (86.4% → 85.4%); topology proxies add 0.2 pp; the form-plus-topology hybrid adds 0.9 pp—all far below the 5-pp threshold for substantive explanation.
+2. **The deviation-injection synthesis sets a structural ceiling.** Approximately 37% of intra-class UTCI variance is determined by parent ERA5 cell × LCZ class membership; the remaining ~63% is the residual heterogeneity available to candidate explanatory features. The maximum within-class Gini reduction any feature subcategorization can achieve under our synthesis is therefore bounded above by ~22.9 pp (Section 3.5.1, Fig. S2). All quantitative results below should be read against this ceiling.
 
-3. **Geographic position is the missing factor.** A three-feature scheme combining distance to coast, distance to mountain, and an elevation proxy reduces within-class Gini by 10.8 pp—roughly ten times the morphology baseline—and the Coast + Mountain two-feature combination peaks at 14.3 pp. The mechanism is physical (sea-breeze convergence by day, katabatic flow by night), temporally robust across four seasons, and transferable to compact GBA cities (Shenzhen 4/4, Dongguan 3/4) but not to the sprawling case (Guangzhou 0/4).
+3. **Morphology and topology subcategorizations are low-efficiency indicators.** Refining nine built-up LCZ classes into 39 morphology-driven subcategories reduces the within-class share by 1.0 pp (~4% of the ceiling); topology adds 0.2 pp; the hybrid 0.9 pp — all far below the 5-pp threshold. We do not interpret this as evidence that morphology has no causal effect on local UTCI, but as a finding about its *explanatory efficiency under our identification structure*.
 
-4. **Implications for adaptation.** Heat-equity interventions should prioritise geographic factors—coast-proximal cooling corridors, mountain-shadow protection, and elevation-aware building siting—rather than morphology-targeted retrofits within already-classified LCZ patches. The 1.0-pp morphology contribution implies that retrofitting building form alone will deliver disproportionately small public-health returns relative to coastal- and mountain-aligned planning.
+4. **Geographic proxies are the most efficient indicators tested.** A three-feature scheme (coast distance, mountain distance, elevation) reduces within-class Gini by 10.8 pp, roughly ten times the morphology baseline and ~47% of the maximum reducible ceiling. The Coast + Mountain two-feature combination peaks at 14.3 pp. Patterns are consistent with sea-breeze (daytime) and katabatic-flow (nighttime) signatures and persist across four seasons of 2020. Cross-city transfer holds in compact GBA cities (Shenzhen 4/4, Dongguan 3/4 seasons) but not in sprawling Guangzhou (0/4), with city compactness as a candidate moderator (N = 3, preliminary).
+
+5. **Implications for adaptation, conditional on the synthesis.** At the population-weighted scale and under our deviation-injection identification structure, heat-equity interventions should weight geographic factors — coast-proximal cooling corridors, mountain-shadow protection, elevation-aware siting — at least as much as morphology-targeted retrofits within already-classified LCZ patches. We caution that this prioritisation is conditional on the identification structure used here; a higher-resolution observation-driven 100-m UTCI dataset could in principle shift the H1–H4 ranking and is the focus of our planned next phase (Section 4.10).
 
 The complete WUDAPT-FUSE pipeline runs end-to-end in under five minutes on a single GPU workstation; all code, derived data products, and synthesis recipes are released under permissive licences (Section 6) to support replication and extension to additional subtropical and tropical cities.
 
@@ -1527,7 +1551,7 @@ and nighttime katabatic drainage.
 
 ## Figure 9. Physical mechanism — coast and mountain drive within-class heat inequality.
 
-Phase 6.5 decomposes the Phase 6 geography breakthrough into its
+Phase 6.5 decomposes the Phase 6 geography reduction into its
 physical components. (a) Mean UTCI as a function of distance to
 the nearest water body, stratified by major built-up LCZ classes
 (LCZ 2, 4, 6, 8, 9). UTCI rises by 0.2–0.5 °C from the coast inland
@@ -1563,7 +1587,7 @@ of features. More features do not equal more reduction; small
 focused feature sets (D, E) outperform high-dimensional combinations
 (F). (c) Subcategory count per scheme. (d) Within-group Gini share
 by LCZ-class vs subcategory grouping for each scheme. (e) Summary
-panel showing the breakthrough finding: geographic position alone
+panel showing the central finding: geographic position alone
 (coast/mountain distance) absorbs more within-class inequality than
 all 19 features combined—evidence of curse of dimensionality and
 of geography's role as the dominant non-geometric driver.
@@ -1585,9 +1609,10 @@ clustering quality—values exceed 0.5 for most classes, confirming
 that the lack of Gini reduction is not due to poor clustering.
 (e) Between-group Gini share, with small complementary changes.
 
-The figure provides the central empirical refutation of the
-hypothesis that topology can complement morphology to absorb
-within-class thermal inequality.
+The figure provides the central empirical evidence on the question
+whether topology can complement morphology under our identification
+structure: it cannot, at least at the explanatory-efficiency level
+the within-class Gini decomposition can resolve.
 
 ## Figure 6. Topological data analysis of the 100-m UTCI field.
 
