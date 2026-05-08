@@ -4,7 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://img.shields.io/badge/DOI-pending-orange.svg)](#citation)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.PENDING.svg)](https://doi.org/10.5281/zenodo.PENDING)
+[![GitHub release](https://img.shields.io/github/v/release/s2134612-hub/WUDAPT-FUSE)](https://github.com/s2134612-hub/WUDAPT-FUSE/releases)
 
 ---
 
